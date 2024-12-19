@@ -6,7 +6,7 @@ class OllamaInterface(LLMInterface):
     """
     Eine LLM-Implementierung für Ollama.
     """
-    def __init__(self, model_name="llama3-groq-tool-use", base_url="http://localhost:11434/api/generate"):
+    def __init__(self, model_name="llama3.2", base_url="http://localhost:11434/api/generate"):
         self.model_name = model_name
         self.base_url = base_url
 
@@ -14,6 +14,9 @@ class OllamaInterface(LLMInterface):
         """
         Sendet einen Prompt an die Ollama API und gibt die Antwort zurück.
         """
+
+        print("\n\nLLM Prompt:\n",prompt, "\n\n")
+
         payload = {"model": self.model_name, "prompt": prompt}
         try:
             response = requests.post(self.base_url, headers={"Content-Type": "application/json"}, data=json.dumps(payload), stream=True)
@@ -23,7 +26,9 @@ class OllamaInterface(LLMInterface):
                     if line:
                         json_object = json.loads(line.decode('utf-8'))
                         full_response += json_object.get('response', '')
-                return full_response.strip()
+                final_response = full_response.strip()
+                print("\n\nLLM RESPONSE:\n", final_response, "\n\n")
+                return final_response
             else:
                 raise Exception(f"Ollama API Fehler: {response.status_code} - {response.text}")
         except Exception as e:

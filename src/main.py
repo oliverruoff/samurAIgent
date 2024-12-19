@@ -1,20 +1,10 @@
-from agents import CoordinatorAgent, AnalyzerAgent
 from llm import ollama_interface
+from agents import CoordinatorAgent
 
-USER_REQUEST = "Create a interface to ChatGPT."
+USER_REQUEST = "Instead of printing, the ev.py should use logging. Change it to use proper python logging!"
 
 if __name__ == '__main__':
 
-    # Initialize LLM interface
     llm_interface = ollama_interface.OllamaInterface()
-
-    # Initialize agents
-    analyzer_agent = AnalyzerAgent.AnalyzerAgent(llm_interface)  
-
-    list_of_agents = [None, analyzer_agent] #add agents here - None on 0, too keep the ids correct
-
-    print('List of agents:', list_of_agents)
-
-    coordinator_agent = CoordinatorAgent.CoordinatorAgent(llm_interface, USER_REQUEST, list_of_agents)
-
-    coordinator_agent.run("")
+    coordinator = CoordinatorAgent.CoordinatorAgent(USER_REQUEST, llm_interface)
+    coordinator.run()

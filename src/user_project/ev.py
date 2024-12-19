@@ -1,6 +1,5 @@
 import os
 import shutil
-import sys
 import logging
 
 # Constants
@@ -9,11 +8,7 @@ CURR_PUSH_PATH = f'{EV_DIR}/.curr_push'
 CARRIED_OVER_PATH = f'{EV_DIR}/.carried_over'
 CARRIED_OVER_FILE = f'{EV_DIR}/.carried_over.txt'
 
-logging.basicConfig(
-    format='%(asctime)s %(levelname)-8s: %(message)s',
-    level=logging.INFO,
-    datefmt='%Y-%m-%d %H:%M:%S'
-)
+logging.basicConfig(level=logging.INFO)
 
 def push(tag):
     # Create new push with tag

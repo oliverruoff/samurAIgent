@@ -1,0 +1,13 @@
+```bash
+#!/bin/bash
+
+LOG_DATEFORMAT="%Y-%m-%d %H:%M:%S"
+
+function log() {
+  echo "$1 $LOG_DATEFORMAT"
+}
+
+log "Starting application..."
+# your app logic here...
+log "Application finished."
+```
